@@ -10,6 +10,7 @@ import com.roadsidehelp.api.feature.auth.repository.UserAccountRepository;
 import com.roadsidehelp.api.config.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -119,4 +120,18 @@ public class UserServiceImpl implements UserService {
         return userRepo.findById(userId)
                 .orElseThrow(() -> new ApiException(ErrorCode.USER_NOT_FOUND, USER_NOT_FOUND));
     }
+
+    @Override
+    @Transactional
+    public void deleteUser(String userId) {
+
+        UserAccount user = userRepo.findById(userId)
+                .orElseThrow(() -> new ApiException(
+                        ErrorCode.USER_NOT_FOUND,
+                        USER_NOT_FOUND
+                ));
+
+        userRepo.delete(user);
+    }
+
 }

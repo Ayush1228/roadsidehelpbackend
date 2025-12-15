@@ -8,6 +8,7 @@ import com.roadsidehelp.api.feature.auth.dto.AuthResponse;
 import com.roadsidehelp.api.feature.auth.dto.RegisterResponse;
 import com.roadsidehelp.api.feature.auth.entity.RefreshToken;
 import com.roadsidehelp.api.feature.auth.entity.UserAccount;
+import com.roadsidehelp.api.feature.auth.entity.UserRole;
 import com.roadsidehelp.api.feature.auth.repository.RefreshTokenRepository;
 import com.roadsidehelp.api.feature.auth.repository.UserAccountRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +35,6 @@ public class AuthService {
     private final JwtProperties jwtProperties;
     private final OtpAuthService otpService;
 
-
     @Transactional
     public RegisterResponse register(String fullName, String email, String phone, String password) {
 
@@ -59,7 +59,7 @@ public class AuthService {
                 .isVerified(false)
                 .verificationToken(token)
                 .tokenExpiration(expiry)
-                .roles(new HashSet<>(Set.of("USER")))
+                .roles(new HashSet<>(Set.of(UserRole.ROLE_USER)))
                 .build();
 
         userRepo.save(user);

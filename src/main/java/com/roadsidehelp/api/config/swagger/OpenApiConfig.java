@@ -19,7 +19,7 @@ public class OpenApiConfig {
     public OpenAPI roadsideHelpAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("RoadsideHelp API Documentation 1")
+                        .title("RoadsideHelp API Documentation")
                         .description("Complete backend API reference for the Roadside Assistance Platform")
                         .version("1.0.0")
                         .contact(new Contact()
@@ -65,7 +65,7 @@ public class OpenApiConfig {
     public GroupedOpenApi mechanicGroup() {
         return GroupedOpenApi.builder()
                 .group("Garage")
-                .pathsToMatch("/api/v1/admin/garages/**", "/api/v1/garages/owner/**", "/api/v1/garages/public/**")
+                .pathsToMatch("/api/v1/garages/owner/**", "/api/v1/garages/public/**")
                 .build();
     }
 
@@ -81,7 +81,7 @@ public class OpenApiConfig {
     public GroupedOpenApi adminGroup() {
         return GroupedOpenApi.builder()
                 .group("Admin Panel")
-                .pathsToMatch("/api/v1/admin/**")
+                .pathsToMatch("/api/v1/garages/admin/**")
                 .build();
     }
 }

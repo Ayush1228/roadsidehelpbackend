@@ -1,6 +1,5 @@
 package com.roadsidehelp.api.feature.garage.controller;
 
-import com.roadsidehelp.api.core.utils.CurrentUser;
 import com.roadsidehelp.api.feature.garage.dto.*;
 import com.roadsidehelp.api.feature.garage.service.OwnerGarageService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,16 +46,6 @@ public class GarageOwnerController {
     @PostMapping("/update-documents")
     public ResponseEntity<GarageResponse> updateDocuments(@RequestBody GarageDocumentRequest req) {
         return ResponseEntity.ok(garageService.updateDocuments(req));
-    }
-
-    // Owner: Change verification status (used for reapply)
-    @Operation(summary = "Change verification status", description = "Owner requests verification or re-verify")
-    @ApiResponse(responseCode = "200", description = "Status updated")
-    @PatchMapping("/status")
-    public ResponseEntity<GarageResponse> updateVerificationStatus(
-            @RequestParam boolean verified) {
-        String ownerId = CurrentUser.getUserId();
-        return ResponseEntity.ok(garageService.updateVerificationStatus(ownerId, verified));
     }
 
     @PatchMapping("/open-status")

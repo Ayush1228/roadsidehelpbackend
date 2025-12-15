@@ -17,4 +17,6 @@ public interface UserService {
 
     UserAccount getUserEntity(String userId);
 
+    void deleteUser(String userId);
+
 }

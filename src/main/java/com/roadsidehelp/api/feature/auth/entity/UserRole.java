@@ -1,7 +1,7 @@
 package com.roadsidehelp.api.feature.auth.entity;
 
 public enum UserRole {
-    USER,
-    MECHANIC,
-    ADMIN
+    ROLE_USER,
+    ROLE_GARAGE_OWNER,
+    ROLE_ADMIN
 }

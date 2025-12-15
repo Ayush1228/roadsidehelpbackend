@@ -72,4 +72,19 @@ public class UserController {
         return ResponseEntity.ok(userService.getLoggedUserFullInfo(userId));
     }
 
+    // -------------------- DELETE ACCOUNT --------------------
+
+    @Operation(
+            summary = "Delete logged-in user account",
+            description = "Permanently deletes the authenticated user's account"
+    )
+    @ApiResponse(responseCode = "204", description = "User deleted successfully")
+    @ApiResponse(responseCode = "404", description = "User not found")
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteMyAccount() {
+
+        String userId = CurrentUser.getUserId();
+        userService.deleteUser(userId);
+        return ResponseEntity.noContent().build();
+    }
 }

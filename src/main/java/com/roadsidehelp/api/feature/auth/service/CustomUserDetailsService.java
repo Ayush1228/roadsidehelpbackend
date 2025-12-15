@@ -21,18 +21,19 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         var authorities = user.getRoles().stream()
-                .map(SimpleGrantedAuthority::new).toList();
+                .map(role -> new SimpleGrantedAuthority(role.name()))
+                .toList();
 
         return CustomUserPrincipal.from(user, authorities);
     }
 
-    // Used by JWT Filter
     public UserDetails loadUserById(String userId) {
         UserAccount user = userRepo.findById(userId)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         var authorities = user.getRoles().stream()
-                .map(SimpleGrantedAuthority::new).toList();
+                .map(role -> new SimpleGrantedAuthority(role.name()))
+                .toList();
 
         return CustomUserPrincipal.from(user, authorities);
     }

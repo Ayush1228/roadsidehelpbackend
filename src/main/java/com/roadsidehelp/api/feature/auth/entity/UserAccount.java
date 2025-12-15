@@ -52,7 +52,8 @@ public class UserAccount extends BaseEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
-    private Set<String> roles = new HashSet<>();
+    @Enumerated(EnumType.STRING)
+    private Set<UserRole> roles = new HashSet<>();
 
     @Column(name = "is_active")
     private boolean active = true;

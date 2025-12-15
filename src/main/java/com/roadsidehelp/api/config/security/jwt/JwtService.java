@@ -1,5 +1,6 @@
 package com.roadsidehelp.api.config.security.jwt;
 
+import com.roadsidehelp.api.feature.auth.entity.UserRole;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -34,7 +35,7 @@ public class JwtService {
     // -----------------------------------------------------
     // CREATE ACCESS TOKEN
     // -----------------------------------------------------
-    public String generateAccessToken(String userId, String username, Collection<String> roles) {
+    public String generateAccessToken(String userId, String username, Collection<UserRole> roles) {
         Instant now = Instant.now();
         Instant exp = now.plus(properties.getAccessTokenValiditySeconds(), ChronoUnit.SECONDS);
 
