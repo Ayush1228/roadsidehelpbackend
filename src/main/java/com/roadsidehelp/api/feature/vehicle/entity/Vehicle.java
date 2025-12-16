@@ -22,13 +22,14 @@ public class Vehicle extends BaseEntity {
     @Column(nullable = false)
     private VehicleType type; // BIKE, CAR
 
+    @Column(name = "vehicle_number", nullable = false, length = 20, unique = true)
+    private String vehicleNumber;
+
     @Column(nullable = false)
     private String brand;
 
     @Column(nullable = false)
     private String model;
-
-    private String registrationNumber;
 
     private Integer manufacturingYear;
 }

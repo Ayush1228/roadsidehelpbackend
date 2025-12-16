@@ -78,6 +78,14 @@ public class OpenApiConfig {
     }
 
     @Bean
+    public GroupedOpenApi vehicleGroup() {
+        return GroupedOpenApi.builder()
+                .group("Vehicles")
+                .pathsToMatch("/api/v1/vehicles/**")
+                .build();
+    }
+
+    @Bean
     public GroupedOpenApi adminGroup() {
         return GroupedOpenApi.builder()
                 .group("Admin Panel")

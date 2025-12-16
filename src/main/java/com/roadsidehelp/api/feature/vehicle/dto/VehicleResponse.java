@@ -10,8 +10,8 @@ public class VehicleResponse {
 
     private String id;
     private VehicleType type;
+    private String vehicleNumber;
     private String brand;
     private String model;
-    private String registrationNumber;
     private Integer manufacturingYear;
 }

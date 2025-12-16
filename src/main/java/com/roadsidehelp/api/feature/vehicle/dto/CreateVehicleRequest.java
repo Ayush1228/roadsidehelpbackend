@@ -13,13 +13,15 @@ public class CreateVehicleRequest {
     @NotNull
     private VehicleType type;
 
+    @NotNull
+    private String vehicleNumber;
+
     @NotBlank
     private String brand;
 
     @NotBlank
     private String model;
 
-    private String registrationNumber;
     private Integer manufacturingYear;
 }
 
