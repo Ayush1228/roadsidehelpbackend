@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -61,7 +62,7 @@ public class AuthController {
     @ApiResponse(responseCode = "200", description = "Logged out successfully")
     @ApiResponse(responseCode = "400", description = "Invalid refresh token")
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestBody @NonNull LogoutRequest request) {
+    public ResponseEntity<String> logout(@RequestBody @Valid @NonNull LogoutRequest request) {
         authService.logout(request.refreshToken());
         return ResponseEntity.ok("Logged out successfully");
     }

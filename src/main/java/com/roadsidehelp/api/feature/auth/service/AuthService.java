@@ -154,19 +154,23 @@ public class AuthService {
 
     @Transactional
     public void logout(String refreshToken) {
-        RefreshToken rt = refreshRepo.findByToken(refreshToken)
+
+        RefreshToken token = refreshRepo.findByToken(refreshToken)
                 .orElseThrow(() -> new ApiException(
                         ErrorCode.REFRESH_TOKEN_NOT_FOUND,
-                        "Refresh token not found"));
+                        "Invalid refresh token"
+                ));
 
-        if (rt.isRevoked()) {
+        if (token.isRevoked()) {
             throw new ApiException(
                     ErrorCode.REFRESH_TOKEN_ALREADY_REVOKED,
-                    "Token already revoked");
+                    "Refresh token already revoked"
+            );
         }
 
-        rt.setRevoked(true);
-        refreshRepo.save(rt);
+        token.setRevoked(true);
+//        token.setRevokedAt(OffsetDateTime.now())
+        refreshRepo.save(token);
     }
 
     @Transactional
