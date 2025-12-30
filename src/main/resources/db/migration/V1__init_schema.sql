@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS vehicle (
 -- MECHANIC (FIXED)
 -- ========================================
 CREATE TABLE IF NOT EXISTS mechanic (
-                                        id CHAR(36) NOT NULL PRIMARY KEY,
+    id CHAR(36) NOT NULL PRIMARY KEY,
 
     user_account_id CHAR(36) NOT NULL UNIQUE,
 

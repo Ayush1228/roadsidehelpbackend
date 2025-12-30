@@ -1,5 +1,3 @@
 package com.roadsidehelp.api.feature.auth.dto;
 
-public record ForgotPasswordRequest(
-        String emailOrPhone
-) {}
+public record ForgotPasswordRequest(String email) {}

@@ -152,7 +152,6 @@ public class AuthService {
         return new AuthResponse(newAccess, newRefresh, jwtService.getExpiration(newAccess).toInstant());
     }
 
-
     @Transactional
     public void logout(String refreshToken) {
         RefreshToken rt = refreshRepo.findByToken(refreshToken)
@@ -173,11 +172,14 @@ public class AuthService {
     @Transactional
     public void logoutFromAllDevices(String userId) {
 
-        List<RefreshToken> tokens = refreshRepo.findAllByUserId(userId);
+        List<RefreshToken> tokens =
+                refreshRepo.findAllByUserIdAndRevokedFalse(userId);
 
         if (tokens.isEmpty()) {
-            throw new ApiException(ErrorCode.NO_ACTIVE_SESSIONS,
-                    "User has no active sessions");
+            throw new ApiException(
+                    ErrorCode.NO_ACTIVE_SESSIONS,
+                    "User has no active sessions"
+            );
         }
 
         tokens.forEach(t -> t.setRevoked(true));
