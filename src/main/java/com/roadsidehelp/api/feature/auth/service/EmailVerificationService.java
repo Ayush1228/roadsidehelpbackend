@@ -45,7 +45,7 @@ public class EmailVerificationService {
 
     public void sendResetPasswordEmail(UserAccount user) {
 
-        String link = "http://localhost:8080/api/v1/auth/password/reset?token="
+        String link = "http://localhost:5173/update-password?token="
                 + user.getResetPasswordToken();
 
         emailService.send(
@@ -54,6 +54,4 @@ public class EmailVerificationService {
                 "Click here to reset your password: " + link
         );
     }
-
-
 }

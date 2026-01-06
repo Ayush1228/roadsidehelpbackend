@@ -243,11 +243,10 @@ public class AuthService {
         user.setResetPasswordToken(token);
         user.setResetPasswordExpiry(
                 OffsetDateTime.now(ZoneId.of(TimeZones.INDIA))
-                        .plusMinutes(15)
+                        .plusMinutes(5)
         );
         userRepo.save(user);
 
-        // send email here
         emailVerificationService.sendResetPasswordEmail(user);
     }
 
