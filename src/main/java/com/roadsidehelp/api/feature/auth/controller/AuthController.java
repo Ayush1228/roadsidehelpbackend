@@ -83,9 +83,8 @@ public class AuthController {
     @ApiResponse(responseCode = "200", description = "OTP sent successfully")
     @ApiResponse(responseCode = "404", description = "User not found")
     @PostMapping("/otp/send")
-    public ResponseEntity<String> sendOtp(@RequestBody @NonNull SendOtpRequest request) {
-        otpService.sendOtp(request.username(), OtpPurpose.LOGIN);
-        return ResponseEntity.ok("OTP sent successfully");
+    public ResponseEntity<OtpSendResponse> sendOtp(@RequestBody @NonNull SendOtpRequest request) {
+        return ResponseEntity.ok(otpService.sendOtp(request.username(), OtpPurpose.LOGIN));
     }
 
     // ================= OTP LOGIN =================

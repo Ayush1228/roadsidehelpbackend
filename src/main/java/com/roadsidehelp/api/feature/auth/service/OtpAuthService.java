@@ -2,6 +2,7 @@ package com.roadsidehelp.api.feature.auth.service;
 
 import com.roadsidehelp.api.config.exception.ApiException;
 import com.roadsidehelp.api.config.exception.ErrorCode;
+import com.roadsidehelp.api.feature.auth.dto.OtpSendResponse;
 import com.roadsidehelp.api.feature.auth.entity.OtpCode;
 import com.roadsidehelp.api.feature.auth.entity.OtpPurpose;
 import com.roadsidehelp.api.feature.auth.entity.UserAccount;
@@ -24,7 +25,7 @@ public class OtpAuthService {
     private final OtpTransactionService otpTx;
 
     // Send OTP to user email or phone
-    public void sendOtp(String emailOrPhone, OtpPurpose purpose) {
+    public OtpSendResponse sendOtp(String emailOrPhone, OtpPurpose purpose) {
 
         UserAccount user = userRepo
                 .findByEmailOrPhoneNumber(emailOrPhone, emailOrPhone)
@@ -41,6 +42,7 @@ public class OtpAuthService {
                 subject,
                 message
         );
+        return new OtpSendResponse("OTP sent successfully");
     }
 
 

@@ -49,7 +49,7 @@ public class AuthService {
 
         String token = UUID.randomUUID().toString();
 
-        OffsetDateTime expiry = OffsetDateTime.now(ZoneId.of(TimeZones.INDIA)).plusMinutes(15);
+        OffsetDateTime expiry = OffsetDateTime.now(ZoneId.of(TimeZones.INDIA)).plusMinutes(5);
 
         UserAccount user = UserAccount.builder()
                 .fullName(fullName)
@@ -75,7 +75,8 @@ public class AuthService {
                 user.getEmail(),
                 user.getPhoneNumber(),
                 user.isVerified(),
-                "Account created. Please check your email to verify your account."
+                "Account created. Please check your email to verify your account.",
+                token
         );
     }
 

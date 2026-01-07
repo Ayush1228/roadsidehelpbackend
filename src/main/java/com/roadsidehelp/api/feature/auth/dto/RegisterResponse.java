@@ -6,6 +6,7 @@ public record RegisterResponse(
         String email,
         String phoneNumber,
         boolean isVerified,
-        String message
+        String message,
+        String verificationToken
 ) {
 }

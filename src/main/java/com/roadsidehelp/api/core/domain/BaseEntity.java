@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
 
 @MappedSuperclass
 @Getter
@@ -14,31 +13,24 @@ import java.time.ZoneId;
 @ToString
 public abstract class BaseEntity {
 
-    private static final ZoneId IST = ZoneId.of("Asia/Kolkata");
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false, updatable = false, length = 36)
     private String id;
 
-    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMP")
+    @Column(
+            name = "created_at",
+            nullable = false,
+            updatable = false,
+            insertable = false
+    )
     private OffsetDateTime createdAt;
 
-    @Column(name = "updated_at", nullable = false, columnDefinition = "TIMESTAMP")
+    @Column(
+            name = "updated_at",
+            nullable = false,
+            insertable = false,
+            updatable = false
+    )
     private OffsetDateTime updatedAt;
-
-    @PrePersist
-    protected void prePersist() {
-        OffsetDateTime now = OffsetDateTime.now(IST);
-
-        if (this.createdAt == null) {
-            this.createdAt = now;
-        }
-        this.updatedAt = now;
-    }
-
-    @PreUpdate
-    protected void preUpdate() {
-        this.updatedAt = OffsetDateTime.now(IST);
-    }
 }

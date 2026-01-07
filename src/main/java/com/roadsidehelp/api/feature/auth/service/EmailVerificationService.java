@@ -8,8 +8,6 @@ import com.roadsidehelp.api.infrastructure.email.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 @RequiredArgsConstructor
 public class EmailVerificationService {
@@ -26,20 +24,12 @@ public class EmailVerificationService {
         userRepo.save(user);
     }
 
-    public String generateToken(UserAccount user){
-        String token = UUID.randomUUID().toString();
-        user.setVerificationToken(token);
-        return token;
-    }
-
-    public void sendVerification(UserAccount user){
-        String token = generateToken(user);
-        userRepo.save(user);
-
+    public void sendVerification(UserAccount user) {
         emailService.send(
                 user.getEmail(),
                 "Verify your account",
-                "Click here to verify: http://localhost:8080/api/v1/auth/verify-email?token=" + token
+                "Click here to verify: http://localhost:8080/api/v1/auth/verify-email?token="
+                        + user.getVerificationToken()
         );
     }
 
